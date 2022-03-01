@@ -22,6 +22,7 @@ const displaySearchResult = phones=>{
   let count=1;
   const searchResult=document.getElementById("search-result");
   searchResult.textContent='';
+  phoneDetails.textContent='';
   //console.log(phones.length);
   if(phones.length > 0){
   notFound.textContent='';//not found remove
@@ -44,7 +45,6 @@ const displaySearchResult = phones=>{
   })}
   else{
     notFound.textContent='';
-    phoneDetails.textContent='';
     var h1=document.createElement("h1");
     h1.classList.add('text-center','text-warning');
     h1.innerText=`No Result Found`;
@@ -65,7 +65,14 @@ const loadPhoneId = phoneId=>{
 //phone details
 const displayPhonedetails= phone =>{
   //console.log(phone);
- 
+  let checkRelease;//check release date
+ if(phone.releaseDate.length>0){
+   checkRelease = phone.releaseDate
+ }
+ else
+ {
+   checkRelease="No Realese Date";
+ }
   phoneDetails.textContent=''; //clear previous details data
   const div= document.createElement("div");
   div.classList.add('card');
@@ -74,12 +81,12 @@ const displayPhonedetails= phone =>{
   <img src="${phone.image}" class="card-img-top img-fluid card-img-size" alt="...">
   <div class="card-body bg-info">
     <h5 class="card-title">${phone.name}</h5>
-    <h5 class="card-title">${phone.releaseDate}</h5>
+    <h5 class="card-title">${checkRelease}</h5>
     <h5 class="card-text">Mainfeatures: storage:${phone.mainFeatures.storage}, displaySize:${phone.mainFeatures.displaySize}, chipSet:${phone.mainFeatures.chipSet}, memory:${phone.mainFeatures.memory}</h5>
     <h5 class="card-title">Sensor:${phone.mainFeatures.sensors}</h5>
     <h5 class="">Others: Brand:${phone.brand}, Id:${phone.slug}</h5>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div> `
+    
+  </div> `;
   phoneDetails.appendChild(div);
 }
 
