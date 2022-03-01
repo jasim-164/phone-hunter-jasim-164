@@ -21,15 +21,19 @@ const displaySearchResult = phones=>{this
     console.log(phone);
     const div=document.createElement("div");
     div.classList.add('col');
-    div.innerHTML=` <div class="card h-100">
+    div.innerHTML=` <div onclick="loadPhoneId('${phone.slug}')" class="card h-100">
     <img src="${phone.image}" class="card-img-top " alt="...">
     <div class="card-body">
       <h5 class="card-title">${phone.phone_name}</h5>
       <h3 class="brand">${phone.brand}</h3>
+      <button type="button" class="btn btn-info details-button">Details</button>
       <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
     </div>
   </div> `
   searchResult.appendChild(div);
+  document.querySelector('.details-button').addEventListener("click",function(e){
+    e.target
+  })
   })}
   else{
     const notFound=document.getElementById("notFound");
@@ -39,6 +43,19 @@ const displaySearchResult = phones=>{this
     notFound.appendChild(h1);
   }
 
+}
+
+const loadPhoneId = phoneId=>{
+  console.log(phoneId);
+  const url=`https://openapi.programming-hero.com/api/phone/${phoneId}`;
+  console.log(url);
+  fetch(url)
+   .then(result=>result.json())
+   .then(info=>displayPhonedetails(info.data));
+}
+
+const displayPhonedetails= phone =>{
+  console.log(phone);
 }
 
 //const InputText=document.getElementById("input-text");
