@@ -13,15 +13,20 @@ const searchPhone =()=>{
         .then(phone => displaySearchResult(phone.data))//phone.data[3].phone_name
 }
 let notFound=document.getElementById("notFound"); 
+const phoneDetails=document.getElementById('phone-details');
+
+
+
 const displaySearchResult = phones=>{
   //constconsole.log(phones);
+  let count=1;
   const searchResult=document.getElementById("search-result");
   searchResult.textContent='';
   //console.log(phones.length);
   if(phones.length > 0){
   notFound.textContent='';//not found remove
   phones.forEach(phone=>{
-    console.log(phone);
+    //console.log(phone);
     const div=document.createElement("div");
     div.classList.add('col');
     div.innerHTML=` <div class="card h-100">
@@ -30,7 +35,7 @@ const displaySearchResult = phones=>{
       <h5 class="card-title">${phone.phone_name}</h5>
       <h3 class="brand">${phone.brand}</h3>
       <button onclick="loadPhoneId('${phone.slug}')" type="button" class="btn btn-info details-button">Details</button>
-      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+      
     </div>
   </div> `
   searchResult.appendChild(div);
@@ -40,6 +45,7 @@ const displaySearchResult = phones=>{
   })}
   else{
     notFound.textContent='';
+    phoneDetails.textContent='';
     var h1=document.createElement("h1");
     h1.classList.add('text-center','text-warning');
     h1.innerText=`No Result Found`;
@@ -59,7 +65,7 @@ const loadPhoneId = phoneId=>{
 
 const displayPhonedetails= phone =>{
   console.log(phone);
-  const phoneDetails=document.getElementById('phone-details');
+ 
   phoneDetails.textContent=''; //clear previous details data
   const div= document.createElement("div");
   div.classList.add('card');
