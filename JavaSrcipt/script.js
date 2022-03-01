@@ -26,7 +26,9 @@ const displaySearchResult = phones=>{
   if(phones.length > 0){
   notFound.textContent='';//not found remove
   phones.forEach(phone=>{
-    //console.log(phone);
+    if(count<=20) //show only 20 result
+    {
+      count++;
     const div=document.createElement("div");
     div.classList.add('col');
     div.innerHTML=` <div class="card h-100">
@@ -37,11 +39,8 @@ const displaySearchResult = phones=>{
       <button onclick="loadPhoneId('${phone.slug}')" type="button" class="btn btn-info details-button">Details</button>
       
     </div>
-  </div> `
-  searchResult.appendChild(div);
-  document.querySelector('.details-button').addEventListener("click",function(e){
-    e.target
-  })
+  </div> `;
+  searchResult.appendChild(div);}
   })}
   else{
     notFound.textContent='';
@@ -63,8 +62,9 @@ const loadPhoneId = phoneId=>{
    .then(info=>displayPhonedetails(info.data));
 }
 
+//phone details
 const displayPhonedetails= phone =>{
-  console.log(phone);
+  //console.log(phone);
  
   phoneDetails.textContent=''; //clear previous details data
   const div= document.createElement("div");
@@ -83,8 +83,7 @@ const displayPhonedetails= phone =>{
   phoneDetails.appendChild(div);
 }
 
-//const InputText=document.getElementById("input-text");
-//const searchButton = document.getElementById("button-addon2")
+
 
 
 
